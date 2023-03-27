@@ -32,5 +32,6 @@ cd mern-shop-client
 # Facts 
 1. for the test the .env of both folders were not hidden, but in case of production should be ignore.
 2. the credentials to sign up an admin user is `4455` if you don't want an admin user let it empty. 
-3. the new products will be seen in the bottom of the home page. 
+3. the image thar you will set in the new product form in dashboard most be and url string.
+4. the new products will be seen in the bottom of the home page. 
  

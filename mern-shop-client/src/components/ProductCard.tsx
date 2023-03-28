@@ -4,6 +4,7 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
+  Chip,
   Icon,
   IconButton,
 } from "@mui/material";
@@ -11,6 +12,15 @@ import AddShoppingCart from "@mui/icons-material/AddShoppingCart";
 import { ProductResponse } from "../interfaces/index";
 import { useDispatch } from "react-redux";
 import { setProductToCart } from "../store/slices/uiSlice";
+
+const categories = [
+  "all",
+  "clothes",
+  "electronics",
+  "furniture",
+  "shoes",
+  "others",
+];
 
 interface Props {
   product: ProductResponse;
@@ -48,6 +58,7 @@ const ProductCard = ({ product }: Props) => {
             borderRadius: "15px",
           }}
         />
+        <Chip label={categories[product.category]} sx={{ marginTop: "15px" }} />
       </CardContent>
     </Card>
   );

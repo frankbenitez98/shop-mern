@@ -18,6 +18,10 @@ const ProductSchema = Schema({
     type: String,
     require: true,
   },
+  category: {
+    type: Number,
+    require: true,
+  },
 });
 
 module.exports = model("Product", ProductSchema);

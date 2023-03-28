@@ -4,6 +4,7 @@ export interface ProductResponse {
   price: number;
   description: string;
   image: string;
+  category: number;
 }
 export type AuthStatus = "checking" | "authenticated" | "not-authenticated";
 
@@ -20,4 +21,5 @@ export interface SmallProduct {
   price: number;
   description: string;
   image: string;
+  category: number;
 }

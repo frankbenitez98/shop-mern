@@ -1,21 +1,14 @@
 import { Grid } from "@mui/material";
 import ProductList from "../components/ProductList";
 import NavBar from "../components/ui/NavBar";
+import Searcher from "../components/ui/Searcher";
 
 const Home = () => {
   return (
     <>
       <NavBar />
-      <Grid container spacing={2} sx={{ padding: "24px" }}>
-        <Grid
-          item
-          xs={12}
-          sx={{
-            display: "flex",
-            alignContent: "center",
-            justifyContent: "center",
-          }}
-        ></Grid>
+      <Grid container spacing={2} sx={{ padding: "24px", marginTop: "15px" }}>
+        <Searcher />
         <ProductList />
       </Grid>
     </>

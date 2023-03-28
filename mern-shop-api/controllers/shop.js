@@ -52,11 +52,12 @@ const seed = async (req, res = response) => {
     const { data } = await axios.get(
       "https://api.escuelajs.co/api/v1/products"
     );
-    const list = data.map((product, index) => ({
+    const list = data.map((product) => ({
       title: product.title,
       price: product.price,
       description: product.description,
       image: product.images[0],
+      category: product.category.id,
     }));
     await Product.insertMany(list.slice(0, 30));
   } catch (error) {

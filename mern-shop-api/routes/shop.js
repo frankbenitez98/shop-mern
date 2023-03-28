@@ -16,6 +16,7 @@ router.post(
       min: 5,
     }),
     check("image", "url of image is required").not().isEmpty(),
+    check("category", "category is required").not().isEmpty(),
     fieldValidate,
   ],
   uploadAProduct

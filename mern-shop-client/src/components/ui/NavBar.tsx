@@ -11,12 +11,27 @@ import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useAuthStore } from "../../hooks/useAuthStore";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/store";
 import ProductInCart from "./ProductInCart";
 import Button from "@mui/material/Button";
 import Cart from "../Cart";
 import { useNavigate } from "react-router-dom";
+import {
+  setCategorySelect,
+  setProductsToShow,
+  setSearchedProducts,
+} from "../../store/slices/uiSlice";
+import { useEffect } from "react";
+
+const categories = [
+  "all",
+  "clothes",
+  "electronics",
+  "furniture",
+  "shoes",
+  "others",
+];
 
 export default function NavBar() {
   //ui states
@@ -27,6 +42,12 @@ export default function NavBar() {
   const navigate = useNavigate();
 
   const cart = useSelector((state: RootState) => state.ui.cartProducts);
+  const categorySelect = useSelector(
+    (state: RootState) => state.ui.categorySelect
+  );
+  const products = useSelector((state: RootState) => state.data.productList);
+
+  const dispatch = useDispatch();
 
   const { startLogout, user } = useAuthStore();
 
@@ -49,6 +70,16 @@ export default function NavBar() {
   const handleOnLogout = () => {
     startLogout();
   };
+
+  const handleCategory = (cat: number) => {
+    dispatch(setCategorySelect(cat));
+  };
+
+  useEffect(() => {
+    const filter = products.filter((prod) => prod.category === categorySelect);
+    console.log(filter);
+    dispatch(setProductsToShow(filter));
+  }, [categorySelect]);
 
   const renderMenu = (
     <Menu
@@ -99,6 +130,29 @@ export default function NavBar() {
       </MenuItem>
     </Menu>
   );
+  const renderCategories = (
+    <Box
+      sx={{
+        display: { xs: "none", md: "flex" },
+        flexGrow: 1,
+        marginLeft: "30px",
+      }}
+      flexDirection="row"
+    >
+      {categories.map((cat, i) => (
+        <MenuItem
+          sx={{
+            borderRadius: "7px",
+          }}
+          key={i}
+          divider={i === categorySelect}
+          onClick={() => handleCategory(i)}
+        >
+          <Typography variant="h6">{cat}</Typography>
+        </MenuItem>
+      ))}
+    </Box>
+  );
 
   return (
     <Box sx={{ flexGrow: 1, marginBottom: "50px" }}>
@@ -113,11 +167,10 @@ export default function NavBar() {
           >
             React Shop
           </Typography>
-          <Box sx={{ flexGrow: 1 }} />
+          {renderCategories}
           <Box>
             <IconButton
               size="large"
-              aria-label="show 17 new notifications"
               color="inherit"
               onClick={handleCartMenuOpen}
             >

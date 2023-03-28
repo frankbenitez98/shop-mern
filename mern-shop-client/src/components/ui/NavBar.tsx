@@ -7,20 +7,17 @@ import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useAuthStore } from "../../hooks/useAuthStore";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/store";
-import ProductInCart from "./ProductInCart";
 import Button from "@mui/material/Button";
 import Cart from "../Cart";
 import { useNavigate } from "react-router-dom";
 import {
   setCategorySelect,
   setProductsToShow,
-  setSearchedProducts,
 } from "../../store/slices/uiSlice";
 import { useEffect } from "react";
 
@@ -73,6 +70,7 @@ export default function NavBar() {
 
   const handleCategory = (cat: number) => {
     dispatch(setCategorySelect(cat));
+    navigate("/");
   };
 
   useEffect(() => {

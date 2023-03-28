@@ -1,12 +1,8 @@
 import { Grid } from "@mui/material";
-import React from "react";
 import ProductCard from "./ProductCard";
 import useGetProducts from "../hooks/useGetProducts";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { useEffect } from "react";
-import { SmallProduct } from "../interfaces/index";
-import { useState } from "react";
 //cambiar a la api creada en express
 
 const ProductList = () => {

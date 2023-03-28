@@ -2,21 +2,25 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { Link, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import { useEffect, useState } from "react";
-import { useAuthStore } from "../hooks/useAuthStore";
 import Swal from "sweetalert2";
 import NavBar from "../components/ui/NavBar";
 import useSetProduct from "../hooks/useSetProduct";
+import { MenuItem, Select } from "@mui/material";
+
+const categories = ["clothes", "electronics", "furniture", "shoes", "others"];
 
 export default function Dashboard() {
   const { error, res, setData } = useSetProduct();
-  const navigate = useNavigate();
+  const [category, setCategory] = useState(5);
+  const handleChange = (event: any) => {
+    setCategory(+(event.target.value as string));
+  };
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -25,6 +29,7 @@ export default function Dashboard() {
       price: +(data.get("price") as string),
       description: data.get("description") as string,
       image: data.get("image") as string,
+      category: category,
     };
     const res = await setData(newProduct);
     console.log(res);
@@ -104,6 +109,21 @@ export default function Dashboard() {
                   label="Image (url)"
                   id="image"
                 />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body2">Category: </Typography>
+                <Select
+                  id="category"
+                  value={category}
+                  onChange={handleChange}
+                  required
+                >
+                  {categories.map((cat, i) => (
+                    <MenuItem value={i + 1} key={i}>
+                      {cat}
+                    </MenuItem>
+                  ))}
+                </Select>
               </Grid>
             </Grid>
             <Button

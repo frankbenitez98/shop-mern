@@ -12,7 +12,6 @@ import NotFound from "../pages/notFound";
 import { useAuthStore } from "../hooks/useAuthStore";
 import { useEffect } from "react";
 import Dashboard from "../pages/dashboard";
-import NavBar from "../components/ui/NavBar";
 
 const lightThemeOptions: ThemeOptions = {
   palette: {
@@ -46,7 +45,6 @@ function App() {
             </>
           ) : (
             <>
-              {/* <NavBar /> */}
               <Route path="/" element={<Home />} />
               <Route path="/*" element={<Navigate to="/" />} />
             </>

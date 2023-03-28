@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { SmallProduct } from "../../interfaces/index";
-import { useSelector } from "react-redux";
-import { RootState } from "../store";
 
 interface Initials {
   loading: boolean;
